@@ -1,0 +1,19 @@
+---
+- name: Install hadoop master node
+  hosts: hadoop-master
+  remote_user: isurues
+  become: true
+  become_method: sudo
+
+  roles:
+    - common
+    - master
+
+- name: Install hadoop slave nodes
+  hosts: hadoop-slave
+  remote_user: isurues
+  become: true
+  become_method: sudo
+
+  roles:
+    - common
