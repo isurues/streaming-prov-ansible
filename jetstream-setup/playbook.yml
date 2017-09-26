@@ -36,3 +36,22 @@
 
   roles:
     - kafka-common
+
+- name: Install flink master node
+  hosts: flink-master
+  remote_user: isurues
+  become: true
+  become_method: sudo
+
+  roles:
+    - flink-common
+    - flink-master
+
+- name: Install flink slave nodes
+  hosts: flink-slave
+  remote_user: isurues
+  become: true
+  become_method: sudo
+
+  roles:
+    - flink-common

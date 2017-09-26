@@ -1,12 +1,18 @@
 [hadoop-master]
-10.10.10.151
+10.0.168.151
 
 [hadoop-slave]
-10.10.10.55
-10.10.10.188
+10.0.168.55
+10.0.168.188
 
 [kafka-master]
-10.10.10.41      broker_id=0     host=kafka1
+10.0.169.41      broker_id=0     host=kafka1
 
 [kafka-slave]
-10.10.10.208      broker_id=1     host=kafka2
+10.0.168.208      broker_id=1     host=kafka2
+
+[flink-master]
+10.0.168.79
+
+[flink-slave]
+10.0.156.38
