@@ -1,6 +1,12 @@
 [hadoop-master]
-10.10.10.1
+10.10.10.151
 
 [hadoop-slave]
-10.10.10.2
-10.10.10.3
+10.10.10.55
+10.10.10.188
+
+[kafka-master]
+10.10.10.41      broker_id=0     host=kafka1
+
+[kafka-slave]
+10.10.10.208      broker_id=1     host=kafka2

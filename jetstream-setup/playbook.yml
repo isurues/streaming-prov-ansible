@@ -17,3 +17,22 @@
 
   roles:
     - common
+
+- name: Install kafka master node
+  hosts: kafka-master
+  remote_user: isurues
+  become: true
+  become_method: sudo
+
+  roles:
+    - kafka-common
+    - kafka-zookeeper
+
+- name: Install kafka slave nodes
+  hosts: kafka-slave
+  remote_user: isurues
+  become: true
+  become_method: sudo
+
+  roles:
+    - kafka-common
