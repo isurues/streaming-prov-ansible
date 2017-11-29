@@ -22,8 +22,11 @@
 
 # name: Build hosts file
 - name: "Build hosts file"
-  lineinfile: dest=/etc/hosts regexp='{{ item.ip }}' line="{{ item.ip }} {{ item.hostname }}" state=present
+  lineinfile: dest=/etc/hosts regexp='{{ item.hostname }}' line="{{ item.ip }} {{ item.hostname }}" state=present
   with_items: "{{ nodes }}"
+
+- lineinfile: dest=/etc/hosts regexp='{{ item.hostname }}' line="{{ item.ip }} {{ item.hostname }}" state=present
+  with_items: "{{ kafka_nodes }}"
 
 - lineinfile: dest=/etc/hosts regexp='127.0.1.1' state=absent
 
@@ -31,13 +34,14 @@
 - file: path=/home/{{ hadoop_user }}/hadoop-data/hdfs/namenode state=directory owner={{ hadoop_user}} mode=750
 - file: path=/home/{{ hadoop_user }}/hadoop-data/hdfs/datanode state=directory owner={{ hadoop_user}} mode=750
 
-- name: Add the service scripts
+- name: Add hadoop config files
   template: src={{ item.src }} dest={{ item.dest }} owner={{ hadoop_user}}
   with_items:
     - {src: "core-site.xml", dest: "/home/{{ hadoop_user }}/hadoop/hadoop-2.8.1/etc/hadoop/core-site.xml"}
     - {src: "hdfs-site.xml", dest: "/home/{{ hadoop_user }}/hadoop/hadoop-2.8.1/etc/hadoop/hdfs-site.xml"}
     - {src: "yarn-site.xml", dest: "/home/{{ hadoop_user }}/hadoop/hadoop-2.8.1/etc/hadoop/yarn-site.xml"}
     - {src: "mapred-site.xml", dest: "/home/{{ hadoop_user }}/hadoop/hadoop-2.8.1/etc/hadoop/mapred-site.xml"}
+    - {src: "kafka.properties", dest: "/home/{{ hadoop_user }}/hadoop/kafka.properties"}
 
 - lineinfile: dest=/home/{{ hadoop_user }}/hadoop/hadoop-2.8.1/etc/hadoop/hadoop-env.sh regexp="^export JAVA_HOME" line="export JAVA_HOME=/home/{{ hadoop_user }}/jdk/jdk1.8.0_144"
 

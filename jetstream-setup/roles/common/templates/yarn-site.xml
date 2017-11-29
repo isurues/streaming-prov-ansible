@@ -41,4 +41,17 @@
     <name>yarn.resourcemanager.admin.address</name>
     <value>{{ nodes[0]['hostname'] }}:8033</value>
   </property>
+
+  <property>
+    <name>yarn.nodemanager.resource.memory-mb</name>
+    <value>12288</value>
+  </property>
+  <property>
+    <name>yarn.scheduler.minimum-allocation-mb</name>
+    <value>3072</value>
+  </property>
+  <property>
+    <name>yarn.nodemanager.vmem-pmem-ratio</name>
+    <value>2.1</value>
+  </property>
 </configuration>

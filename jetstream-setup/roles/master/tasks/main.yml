@@ -7,3 +7,5 @@
 
 - name: Copy slaves into place
   template: src=slaves dest=/home/{{ hadoop_user }}/hadoop/hadoop-2.8.1/etc/hadoop/slaves owner={{ hadoop_user }}
+
+- copy: src=software/kakfa-producer-1.0-jar-with-dependencies.jar dest=/home/{{ hadoop_user }}/hadoop/hadoop-2.8.1

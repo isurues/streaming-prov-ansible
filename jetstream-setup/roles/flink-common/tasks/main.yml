@@ -15,13 +15,22 @@
   unarchive: src=/home/{{ flink_user }}/flink/flink-1.3.2-bin-hadoop27-scala_2.11.tgz dest=/home/{{ flink_user }}/flink owner={{ flink_user}} creates=/home/{{ flink_user }}/flink/flink-1.3.2 copy=no
 
 - name: "Build hosts file"
-  lineinfile: dest=/etc/hosts regexp='{{ item.ip }}' line="{{ item.ip }} {{ item.hostname }}" state=present
+  lineinfile: dest=/etc/hosts regexp='{{ item.hostname }}' line="{{ item.ip }} {{ item.hostname }}" state=present
   with_items: "{{ nodes }}"
+
+- lineinfile: dest=/etc/hosts regexp='{{ item.hostname }}' line="{{ item.ip }} {{ item.hostname }}" state=present
+  with_items: "{{ kafka_nodes }}"
+
+- lineinfile: dest=/etc/hosts regexp='{{ item.hostname }}' line="{{ item.ip }} {{ item.hostname }}" state=present
+  with_items: "{{ hadoop_nodes }}"
 
 - lineinfile: dest=/etc/hosts regexp='127.0.1.1' state=absent
 
 - name: Copy slaves into place
   template: src=slaves dest=/home/{{ flink_user }}/flink/flink-1.3.2/conf/slaves owner={{ flink_user }}
+
+- name: Copy kafka properties file
+  template: src=kafka.properties dest=/home/{{ flink_user }}/flink/kafka.properties owner={{ flink_user }}
 
 - name: Copy flink config file
   template: src=flink-conf.yaml dest=/home/{{ flink_user }}/flink/flink-1.3.2/conf/flink-conf.yaml owner={{ flink_user }}

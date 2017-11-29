@@ -29,4 +29,34 @@
     <name>mapreduce.framework.name</name>  
     <value>yarn</value>  
   </property>
+
+  <!--<property>-->
+    <!--<name>mapreduce.tasktracker.map.tasks.maximum</name>-->
+    <!--<value>2</value>-->
+  <!--</property>-->
+  <!--<property>-->
+    <!--<name>mapreduce.tasktracker.reduce.tasks.maximum</name>-->
+    <!--<value>2</value>-->
+  <!--</property>-->
+  <!--<property>-->
+    <!--<name>mapred.child.java.opts</name>-->
+    <!--<value>-Xmx2048m</value>-->
+  <!--</property>-->
+
+  <property>
+    <name>mapreduce.map.memory.mb</name>
+    <value>6144</value>
+  </property>
+  <property>
+    <name>mapreduce.reduce.memory.mb</name>
+    <value>6144</value>
+  </property>
+  <property>
+    <name>mapreduce.map.java.opts</name>
+    <value>-Xmx5120m</value>
+  </property>
+  <property>
+    <name>mapreduce.reduce.java.opts</name>
+    <value>-Xmx5120m</value>
+  </property>
 </configuration>

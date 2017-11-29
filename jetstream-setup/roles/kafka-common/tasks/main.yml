@@ -18,7 +18,7 @@
 
 # name: Build hosts file
 - name: "Build hosts file"
-  lineinfile: dest=/etc/hosts regexp='{{ item.ip }}' line="{{ item.ip }} {{ item.hostname }}" state=present
+  lineinfile: dest=/etc/hosts regexp='{{ item.hostname }}' line="{{ item.ip }} {{ item.hostname }}" state=present
   with_items: "{{ nodes }}"
 
 - lineinfile: dest=/etc/hosts regexp='127.0.1.1' state=absent
@@ -27,3 +27,9 @@
 
 - name: Copy kafka config file
   template: src=server.properties dest=/home/{{ kafka_user }}/kafka/kafka11/config/server.properties owner={{ kafka_user }}
+
+- name: Copy zookeeper startup script
+  template: src=zookeeper-server-start.sh dest=/home/{{ kafka_user }}/kafka/kafka11/bin/zookeeper-server-start.sh owner={{ kafka_user }}
+
+- name: Copy kafka startup script
+  template: src=kafka-server-start.sh dest=/home/{{ kafka_user }}/kafka/kafka11/bin/kafka-server-start.sh owner={{ kafka_user }}
